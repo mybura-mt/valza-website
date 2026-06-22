@@ -7,6 +7,7 @@
 [[headers]]
   for = "/assets/js/*"
   [headers.values]
+    Access-Control-Allow-Origin = "*"
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
@@ -20,7 +21,41 @@
     Content-Type = "text/html; charset=utf-8"
     Cache-Control = "no-cache"
 
+# Main page — lowercase URL /valza.dc (pretty URL) and direct HTML access
+[[redirects]]
+  from = "/valza.dc"
+  to = "/VALZA.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/valza.dc.html"
+  to = "/VALZA.dc.html"
+  status = 301
+
+# Sub-pages with lowercase URLs
+[[redirects]]
+  from = "/about.dc"
+  to = "/about.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing.dc"
+  to = "/pricing.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/programs.dc"
+  to = "/programs.dc.html"
+  status = 200
+
+# Root serves the main page
 [[redirects]]
   from = "/"
+  to = "/VALZA.dc.html"
+  status = 200
+
+# 404 fallback — serve main page for any unmatched path
+[[redirects]]
+  from = "/*"
   to = "/VALZA.dc.html"
   status = 200

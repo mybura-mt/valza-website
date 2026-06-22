@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOG | VALZA BOXING & FITNESS GYM</title>
+  <meta name="description" content="VALZAの身体設計・メンタル設計・栄養設計に関するブログ。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Oswald:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP',sans-serif;color:#1a1a1a;background:#faf9f7}
+    a{color:inherit;text-decoration:none}
+
+    /* ── Header ── */
+    header{position:fixed;z-index:20;top:0;left:0;width:100%;height:90px;padding:0 clamp(20px,4vw,52px);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.96);border-bottom:1px solid #ece9e3}
+    .logo{width:168px;height:auto;filter:invert(1)}
+    nav{display:flex;align-items:center;gap:32px;font-size:13px}
+    .trial{border:1px solid #222;padding:12px 22px}
+
+    /* ── Hero ── */
+    .hero{padding:170px clamp(20px,6vw,90px) 90px;background:#171717;color:#fff}
+    .hero-inner{max-width:1180px;margin:0 auto}
+    .label{font-family:Oswald;letter-spacing:.34em;font-size:11px;color:#e0a23a}
+    h1{font-family:'Shippori Mincho';font-weight:500;font-size:clamp(38px,6vw,76px);letter-spacing:.06em;margin:26px 0 20px}
+    .hero p{color:#aaa;font-size:14px;line-height:2}
+
+    /* ── Grid ── */
+    .main{max-width:1180px;margin:0 auto;padding:90px 20px 130px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+    .card{background:#fff;border:1px solid #e7e3dc;cursor:pointer;transition:.3s}
+    .card:hover{transform:translateY(-5px);box-shadow:0 18px 45px rgba(0,0,0,.08)}
+    .visual{aspect-ratio:16/10;position:relative;overflow:hidden;display:flex;align-items:flex-end;color:#fff}
+    .visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .card:hover .visual img{transform:scale(1.04)}
+    .visual-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,.1) 60%,transparent 100%)}
+    .visual-label{position:relative;z-index:1;font-family:Oswald;font-size:46px;letter-spacing:.06em;opacity:.9;padding:28px 32px}
+    .content{padding:28px}
+    .meta{font-family:Oswald;font-size:10px;letter-spacing:.18em;color:#a08850}
+    .card h2{font-family:'Shippori Mincho';font-size:20px;line-height:1.75;font-weight:500;margin:15px 0}
+    .excerpt{font-size:13px;line-height:2;color:#777}
+    .more{display:inline-block;margin-top:23px;font-size:12px;border-bottom:1px solid #222;padding-bottom:4px}
+
+    /* ── Article ── */
+    #article-view{display:none;padding:90px 20px 130px}
+    #article-view.visible{display:block}
+    .article-wrap{max-width:780px;margin:0 auto}
+    .back-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;border-bottom:1px solid #1a1a1a;padding-bottom:4px;margin-bottom:44px;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:'Noto Sans JP',sans-serif;color:#1a1a1a}
+    .back-btn:hover{opacity:.6}
+    .article-category{font-family:Oswald;font-size:10px;letter-spacing:.26em;color:#a08850;margin-bottom:16px}
+    .article-date{font-size:11px;color:#aaa;letter-spacing:.1em;margin-bottom:32px}
+    .article-title{font-family:'Shippori Mincho';font-weight:500;font-size:clamp(24px,4vw,40px);line-height:1.65;letter-spacing:.04em;margin-bottom:44px;padding-bottom:32px;border-bottom:1px solid #e7e3dc}
+    .article-lead{font-size:15px;line-height:2.4;color:#444;margin-bottom:48px;font-weight:400}
+    .article-section{margin-bottom:52px}
+    .article-section h3{font-family:'Shippori Mincho';font-size:20px;font-weight:600;letter-spacing:.04em;margin-bottom:20px;padding-left:16px;border-left:3px solid #c1121f;line-height:1.6}
+    .article-section p{font-size:14px;line-height:2.4;color:#555;margin-bottom:16px}
+    .article-section ul{padding-left:20px;margin-bottom:16px}
+    .article-section ul li{font-size:14px;line-height:2.4;color:#555;list-style:disc;margin-bottom:4px}
+    .article-point{background:#f5f3ef;border-left:3px solid #e0a23a;padding:24px 28px;margin:28px 0;border-radius:0 4px 4px 0}
+    .article-point p{font-size:14px;line-height:2.2;color:#444;margin:0}
+    .article-footer{margin-top:64px;padding-top:32px;border-top:1px solid #e7e3dc;display:flex;justify-content:space-between;align-items:center}
+    .article-footer-gym{font-family:Oswald;font-size:12px;letter-spacing:.2em;color:#a08850}
+    .cta-btn{display:inline-block;background:#c1121f;color:#fff;padding:14px 32px;font-size:13px;letter-spacing:.06em}
+    .cta-btn:hover{opacity:.85}
+
+    /* ── Footer ── */
+    footer{background:#111;color:#aaa;padding:55px 20px;text-align:center;font-size:11px;letter-spacing:.1em}
+
+    /* ── Tablet (641–900px) ── */
+    @media(min-width:641px) and (max-width:900px){
+      .grid{grid-template-columns:repeat(2,1fr);gap:20px}
+    }
+
+    /* ── Mobile (≤640px) ── */
+    @media(max-width:640px){
+      header{height:64px}.logo{width:120px}
+      nav a:not(.trial){display:none}.trial{padding:9px 14px;font-size:12px}
+      .hero{padding:110px 20px 60px}
+      .grid{grid-template-columns:1fr;gap:20px}
+      .content{padding:20px}
+      .card h2{font-size:17px}
+      /* 記事本文 */
+      #article-view{padding:70px 16px 80px}
+      .article-title{font-size:22px;margin-bottom:28px;padding-bottom:20px}
+      .article-lead{font-size:14px;margin-bottom:32px}
+      .article-section{margin-bottom:32px}
+      .article-section h3{font-size:17px;padding-left:12px}
+      .article-section ul{padding-left:16px}
+      .article-point{padding:16px 18px}
+      .article-footer{flex-direction:column;align-items:flex-start;gap:20px}
+      .cta-btn{width:100%;text-align:center;padding:14px 20px;font-size:13px;box-sizing:border-box}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash -->
+  <div id="__splash" style="position:fixed;inset:0;z-index:99999;background:#0d0d0d;display:flex;align-items:center;justify-content:center">
+    <div id="__splash-inner" style="text-align:center;opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s ease">
+      <div style="font-family:Oswald,sans-serif;font-size:11px;letter-spacing:.44em;color:#e0a23a;margin-bottom:20px">FITNESS &amp; BOXING</div>
+      <div style="font-family:Oswald,sans-serif;font-size:76px;font-weight:600;letter-spacing:.14em;color:#fff;line-height:1">VALZA</div>
+      <div style="width:44px;height:2px;background:#c1121f;margin:24px auto 0"></div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    if(sessionStorage.getItem('valza_splash')){
+      var s=document.getElementById('__splash');
+      if(s)s.remove();
+      return;
+    }
+    sessionStorage.setItem('valza_splash','1');
+    window.addEventListener('DOMContentLoaded',function(){
+      var inner=document.getElementById('__splash-inner');
+      if(inner){inner.style.opacity='1';inner.style.transform='translateY(0)';}
+      setTimeout(function(){
+        var splash=document.getElementById('__splash');
+        if(!splash)return;
+        splash.style.transition='opacity .8s ease';
+        splash.style.opacity='0';
+        setTimeout(function(){if(splash.parentNode)splash.parentNode.removeChild(splash);},800);
+      },3000);
+    });
+  })();
+  </script>
+
+
+  <header>
+    <a href="VALZA.dc.html"><img class="logo" src="./assets/images/valza-official-logo.png" alt="VALZA"></a>
+    <nav>
+      <a href="about.dc.html">VALZAについて</a>
+      <a href="programs.dc.html">プログラム</a>
+      <a href="pricing.dc.html">料金表</a>
+      <a href="VALZA.dc.html#access">アクセス</a>
+      <a class="trial" href="contact.html">無料体験</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="label">VALZA JOURNAL</span>
+      <h1>BLOG</h1>
+      <p>身体・メンタル・栄養を整え、<br>毎日のパフォーマンスを高めるヒント。</p>
+    </div>
+  </section>
+
+  <!-- 記事一覧グリッド -->
+  <main id="grid-view" class="main">
+    <div class="grid">
+
+      <div class="card" onclick="showArticle('body')">
+        <div class="visual">
+          <img src="assets/images/blog-body.webp" alt="BODY">
+          <div class="visual-overlay"></div>
+          <span class="visual-label">BODY</span>
+        </div>
+        <div class="content">
+          <span class="meta">2026.06.22 / BODY DESIGN</span>
+          <h2>トレーニング前に知っておきたい「動ける身体」のつくり方</h2>
+          <p class="excerpt">筋力だけではなく、姿勢・可動域・身体の使い方を整えることが成果への近道です。</p>
+          <span class="more">記事を読む →</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="showArticle('mental')">
+        <div class="visual">
+          <img src="assets/images/blog-mental.webp" alt="MENTAL">
+          <div class="visual-overlay"></div>
+          <span class="visual-label">MENTAL</span>
+        </div>
+        <div class="content">
+          <span class="meta">2026.06.22 / MENTAL DESIGN</span>
+          <h2>運動を習慣に変えるために、意志の強さより大切なこと</h2>
+          <p class="excerpt">続かないのは意志が弱いからではありません。自然と続けられる環境の設計を解説します。</p>
+          <span class="more">記事を読む →</span>
+        </div>
+      </div>
+
+      <div class="card" onclick="showArticle('nutrition')">
+        <div class="visual">
+          <img src="assets/images/blog-nutrition.webp" alt="NUTRITION">
+          <div class="visual-overlay"></div>
+          <span class="visual-label">NUTRITION</span>
+        </div>
+        <div class="content">
+          <span class="meta">2026.06.22 / NUTRITION DESIGN</span>
+          <h2>身体を変えたい人が、食事で最初に整えるべき3つの基本</h2>
+          <p class="excerpt">厳しい制限より、量・タイミング・継続性。成果を支える食習慣の基本をご紹介します。</p>
+          <span class="more">記事を読む →</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 記事表示エリア -->
+  <div id="article-view">
+    <div class="article-wrap">
+      <button class="back-btn" onclick="showGrid()">← 記事一覧へ戻る</button>
+
+      <!-- BODY DESIGN -->
+      <article id="article-body" style="display:none">
+        <p class="article-category">BODY DESIGN</p>
+        <p class="article-date">2026.06.22</p>
+        <h2 class="article-title">トレーニング前に知っておきたい<br>「動ける身体」のつくり方</h2>
+        <p class="article-lead">
+          強い負荷をかければ身体は変わる——そう思ってトレーニングを始めた方ほど、思うように成果が出なかったり、どこかが痛くなったりした経験はないでしょうか。VALZAが重視するのは「まず動ける身体をつくること」。土台をつくってから積み上げる、というシンプルな原則が、長期的な成果につながります。
+        </p>
+
+        <div class="article-section">
+          <h3>「鍛える」より先に「整える」</h3>
+          <p>多くの方がジムに来て最初にやることは、マシンを動かすこと、走ること、重いものを持つことです。しかしその前に確認すべきことがあります。それは「身体が正しく動いているか」です。</p>
+          <p>姿勢の歪み、関節の可動域の制限、左右の筋力バランスの差——これらが残ったままトレーニングを続けると、狙った部位へ正しく負荷が入らず、効率が落ちます。さらに、代償動作（本来使うべき筋肉の代わりに別の部位で動きをカバーすること）が習慣化し、慢性的な痛みにつながるリスクもあります。</p>
+          <p>VALZAでは、トレーニング開始前に姿勢評価と動作スクリーニングを行い、「整えるべき部分」と「鍛えるべき部分」を分けて考えることから始めます。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>可動域を確保することがパフォーマンスの土台になる</h3>
+          <p>筋肉がいくら強くても、関節がしっかり動かなければその力を発揮できません。股関節・胸椎・足首の可動域は、あらゆる動作の基盤です。</p>
+          <ul>
+            <li>股関節の可動域が狭いと、スクワットで膝や腰への負担が増す</li>
+            <li>胸椎（背中の上部）が固いと、肩関節の動きが制限され、プッシュ系種目でインピンジメントが起きやすくなる</li>
+            <li>足首の柔軟性が不足していると、走る・跳ぶ動作で膝が内側に入りやすくなる</li>
+          </ul>
+          <p>モビリティ（動ける範囲）を広げることで、同じ動作でも身体への負担が減り、より大きな力を安全に発揮できるようになります。</p>
+        </div>
+
+        <div class="article-point">
+          <p>VALZAでは、セッション前に5〜10分のモビリティウォームアップを必ず実施します。これは単なる準備運動ではなく、その日の動きの質を決める重要なプロセスです。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>「身体の使い方」を学ぶことが最大の近道</h3>
+          <p>動ける身体をつくるうえで、最も重要なのは「身体の使い方を学ぶ」ことです。これはスポーツ選手だけの話ではありません。日常的な動作——立つ・歩く・荷物を持つ——においても、正しい使い方があります。</p>
+          <p>たとえば、体幹（コア）を適切に使うことで、腰への負担が大幅に減ります。呼吸を意識することで、コアの安定性が上がり、全身の力が連動しやすくなります。これらは知識として理解するだけでなく、反復によって身体に覚え込ませることが重要です。</p>
+          <p>VALZAのインストラクターは、一つひとつの動作の「なぜそう動くのか」を丁寧に伝えながらセッションを進めます。身体の使い方を理解することで、日常生活のなかでも変化が起き始め、24時間が身体づくりの時間になっていきます。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>目的から逆算した設計を</h3>
+          <p>「動ける身体」の定義は人によって異なります。ダイエットが目的の方、競技力を高めたい方、腰痛を改善したい方——それぞれに必要な動きのパターンも、鍛えるべき筋肉も違います。</p>
+          <p>だからこそVALZAでは、最初のカウンセリングで目的・生活習慣・身体の状態をしっかりヒアリングし、一人ひとりに合った設計から始めます。近道は、あなたの現在地とゴールを正しく把握することから生まれます。</p>
+        </div>
+
+        <div class="article-footer">
+          <span class="article-footer-gym">VALZA FITNESS &amp; BOXING</span>
+          <a class="cta-btn" href="contact.html">無料体験を申し込む</a>
+        </div>
+      </article>
+
+      <!-- MENTAL DESIGN -->
+      <article id="article-mental" style="display:none">
+        <p class="article-category">MENTAL DESIGN</p>
+        <p class="article-date">2026.06.22</p>
+        <h2 class="article-title">運動を習慣に変えるために、<br>意志の強さより大切なこと</h2>
+        <p class="article-lead">
+          「また続かなかった」「自分には意志が足りない」——そう思ったことはありませんか。しかし、運動が習慣にならない理由は、意志の問題ではありません。問題は「仕組み」です。正しい環境と設計があれば、誰でも自然と続けられるようになります。
+        </p>
+
+        <div class="article-section">
+          <h3>習慣化は「意志力」ではなく「設計」の問題</h3>
+          <p>行動科学の研究によれば、人間の行動の約40〜50%は意識的な決断ではなく、習慣（自動的な反応）によって行われています。つまり、続くかどうかは「その行動がどれだけ自動化されているか」にかかっています。</p>
+          <p>意志力は有限のリソースです。仕事や育児で消耗した状態では、「よし、今日もジムへ行こう」という決断を毎日行うこと自体がストレスになります。だからこそ、決断しなくても動けるような仕組みをつくることが大切です。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>行動のハードルを徹底的に下げる</h3>
+          <p>習慣化に最も効果的な方法は、「最初の一歩を限りなく小さくする」ことです。</p>
+          <ul>
+            <li>週5回ではなく、まず週2回から始める</li>
+            <li>1時間ではなく、最初は30分のセッションを選ぶ</li>
+            <li>職場や家から近い場所を選ぶ（通いやすさは継続率に直結する）</li>
+            <li>着替えを前日に準備しておく</li>
+          </ul>
+          <p>VALZAが坂戸駅から徒歩2分という立地にある理由のひとつは、この「通いやすさ」を最優先に考えているからです。ジムへ行くことへのハードルを下げることが、継続の第一条件です。</p>
+        </div>
+
+        <div class="article-point">
+          <p>「週3回行けなかった自分」より「週1回でも続けた自分」のほうが、1年後には確実に前に進んでいます。完璧主義が最大の敵です。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>変化を可視化して「続ける理由」を増やす</h3>
+          <p>人は変化を感じないと飽きます。しかし、身体の変化はゆっくり起きるため、体重や見た目だけを指標にしていると「変わっていない」と感じやすくなります。</p>
+          <p>VALZAでは、以下のような多角的な変化を一緒に確認していきます。</p>
+          <ul>
+            <li>体重・体脂肪率などの数値</li>
+            <li>姿勢・可動域の改善</li>
+            <li>同じ動作での疲れにくさ</li>
+            <li>睡眠の質の変化</li>
+            <li>仕事中や日常での集中力・エネルギー感</li>
+          </ul>
+          <p>体重が変わらなくても、「階段を上るのが楽になった」「肩こりが減った」といった変化は確実に起きています。これらを言語化・記録することで、継続への動機が生まれます。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>インストラクターとの関係性が継続を支える</h3>
+          <p>習慣化において、「誰かに見られている」「誰かと約束している」という感覚は非常に強力です。一人でのトレーニングが続かない方の多くが、パーソナルや少人数クラスでは続けられるのは、この「社会的なつながり」が動機になるからです。</p>
+          <p>VALZAのインストラクターは、単に運動を教えるだけでなく、一人ひとりの状態を継続的に把握し、「今日も来てくれた」という関係性を大切にしています。続けることを、一人で戦う必要はありません。</p>
+        </div>
+
+        <div class="article-footer">
+          <span class="article-footer-gym">VALZA FITNESS &amp; BOXING</span>
+          <a class="cta-btn" href="contact.html">無料体験を申し込む</a>
+        </div>
+      </article>
+
+      <!-- NUTRITION DESIGN -->
+      <article id="article-nutrition" style="display:none">
+        <p class="article-category">NUTRITION DESIGN</p>
+        <p class="article-date">2026.06.22</p>
+        <h2 class="article-title">身体を変えたい人が、食事で<br>最初に整えるべき3つの基本</h2>
+        <p class="article-lead">
+          「何を食べればいいか」より「何を食べてはいけないか」を考えてしまいがちな食事改善。しかし極端な制限は長続きせず、身体にも悪影響を与えることがあります。VALZAが考える栄養設計の出発点は、難しいことではなく「3つの基本を整える」ことです。
+        </p>
+
+        <div class="article-section">
+          <h3>基本1｜必要な「量」を把握する</h3>
+          <p>食事改善の第一歩は、制限ではなく把握です。自分が1日にどれくらいのエネルギーを使い、何をどのくらい食べているかを知ることが土台になります。</p>
+          <p>よくある失敗として、「食べなすぎ」があります。摂取カロリーを極端に減らすと、身体は省エネモードに入り、筋肉を分解してエネルギーを作ろうとします。その結果、体重は落ちても体脂肪率は変わらず、リバウンドしやすい身体になってしまいます。</p>
+          <ul>
+            <li>活動量に見合った総エネルギーを確保する</li>
+            <li>タンパク質は体重1kgあたり1.5〜2gを目安に摂る</li>
+            <li>炭水化物を極端に抜かない（特にトレーニング日は重要）</li>
+          </ul>
+        </div>
+
+        <div class="article-point">
+          <p>「食べない」のではなく「正しく食べる」。これがVALZAの栄養設計の基本的な考え方です。量の把握なしに、質の改善はありません。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>基本2｜タイミングを意識する</h3>
+          <p>何を食べるかと同じくらい、いつ食べるかが重要です。特にトレーニングを行う日は、前後の栄養補給が成果を大きく左右します。</p>
+          <p><strong>トレーニング前（1〜2時間前）</strong></p>
+          <p>消化しやすい炭水化物とタンパク質を少量摂ることで、パフォーマンスが上がります。おにぎり＋ゆで卵、バナナ＋プロテインなどが手軽でおすすめです。</p>
+          <p><strong>トレーニング後（30分〜1時間以内）</strong></p>
+          <p>筋肉の修復と回復のために、タンパク質と炭水化物を速やかに補給します。この「ゴールデンタイム」に適切な栄養を届けることが、筋肉の発達と疲労回復を促進します。</p>
+          <p>また、1日のなかで食事を抜かずに規則的に摂ることも、代謝を安定させるうえで大切です。朝食を抜くと午前中のパフォーマンスが落ち、夜に食べすぎるという悪循環につながりやすくなります。</p>
+        </div>
+
+        <div class="article-section">
+          <h3>基本3｜継続できる食習慣を設計する</h3>
+          <p>どんなに優れた食事プランも、続かなければ意味がありません。継続性こそが最強の栄養戦略です。</p>
+          <p>「完璧な食事」を毎日目指すより、「80点の食事を7日間続ける」ほうが身体は確実に変わります。週に一度の「好きなものを食べる日」を設けることも、長期的な継続には有効です。</p>
+          <ul>
+            <li>食事の記録を1〜2週間つけてみる（意識が変わるだけで食生活が改善される）</li>
+            <li>冷蔵庫に良質な食材を常備する（環境を整える）</li>
+            <li>外食・コンビニでも「選べる」知識を持つ</li>
+            <li>水分補給を忘れない（脱水は集中力低下と疲労感に直結する）</li>
+          </ul>
+          <p>VALZAでは、トレーニング指導と並行して、生活に合った食習慣のアドバイスも行っています。特別な食事制限ではなく、あなたの日常に合わせた「続けられる設計」をいっしょに考えます。</p>
+        </div>
+
+        <div class="article-footer">
+          <span class="article-footer-gym">VALZA FITNESS &amp; BOXING</span>
+          <a class="cta-btn" href="contact.html">無料体験を申し込む</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <footer>© 2026 VALZA BOXING &amp; FITNESS GYM</footer>
+
+  <script>
+    function showArticle(id) {
+      document.getElementById('grid-view').style.display = 'none';
+      document.getElementById('article-view').classList.add('visible');
+      ['body','mental','nutrition'].forEach(function(k){
+        document.getElementById('article-' + k).style.display = k === id ? 'block' : 'none';
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showGrid() {
+      document.getElementById('article-view').classList.remove('visible');
+      document.getElementById('grid-view').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
